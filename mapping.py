@@ -44,11 +44,11 @@ def mapValues(HSL):
 def getBPM(ave):
     ave = ave * 100
     if ave < 20:
-        return 90
+        return 80
     elif ave < 60:
         return 120
     else:
-        return 150
+        return 180
 
 
 def getOctave(ave):

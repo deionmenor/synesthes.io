@@ -5,7 +5,7 @@ import constants
 import random
 import pysynth_p
 import pysynth_e
-import pysynth_c
+import pysynth_d
 import os
 import collections
 from hsl import analyzePartitions
@@ -49,14 +49,13 @@ if __name__ == "__main__":
     print("Making WAVs...")
     pysynth_e.make_wav(tune_plus_rest, fn = "output_melody.wav",  bpm = constants.BPM)
     pysynth_p.make_wav(beat, fn = "output_beat.wav",  bpm = constants.BPM)
-    pysynth_c.make_wav(bass, fn = "output_bass.wav",  bpm = constants.BPM)
+    pysynth_d.make_wav(bass, fn = "output_bass.wav",  bpm = constants.BPM)
 
-    constants.debog = "!!!"
-    print(constants.debog)
-
-    # print(MIN_OCTAVE);
-    # print(MAX_OCTAVE);
-
+    #make bass lower
+    bass_file = AudioSegment.from_wav("output_bass.wav")
+    bass_ = bass_file[:]
+    bass_ = bass_ - 10
+    bass_.export("output_bass.wav", format="wav")
 
     print("Combining audio layers...")
     combineWAVs("output_melody.wav","output_beat.wav","output_final.wav")
@@ -66,6 +65,10 @@ if __name__ == "__main__":
     print(len(beat))
     print(len(bass))
 
+    print("min octave: ", constants.MIN_OCTAVE)
+    print("notes", constants.DIATONIC)
+    print("BPM", constants.BPM)
+
     # Works for Linux
-    # os.system('xdg-open "output_final.wav"')
-    # os.system('xdg-open "'+ filename + '.png"')
+    os.system('xdg-open "output_final.wav"')
+    os.system('xdg-open "'+ filename + '.png"')
