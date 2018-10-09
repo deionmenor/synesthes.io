@@ -1,7 +1,7 @@
 from genetic_algorithm import changeOctaves,changeScale
-import constants
 
 def mapValues(HSL):
+    global BPM
     # scale = input("scale? (1) major (2) minor (3) mixed ---> ")
     scale = 1
     lightness_values_sum = 0
@@ -34,20 +34,19 @@ def mapValues(HSL):
     print(mino)
     maxo = mino+1
     # BPM = int(input("BPM ---> "))
-    constants.BPM = getBPM(saturation_average)
+    BPM = getBPM(saturation_average)
     changeOctaves(mino,maxo)
     changeScale(scale)
 
 
 def getBPM(ave):
     ave = ave * 100
-    print("bpm??",ave)
     if ave < 20:
         return 100
     elif ave < 50:
         return 130
     else:
-        return 180
+        return 150
 
 
 def getOctave(ave):
