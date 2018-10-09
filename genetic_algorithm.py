@@ -142,11 +142,12 @@ def arrange_song_into_aaba(a,b):
 def generateBeat():
     dur = constants.DEFAULT_DURATION
     beat = []
-    for chromosone in range(int(constants.BEATS_PER_SECTION*5)):
+    for chromosone in range(int(constants.BEATS_PER_SECTION*4)):
         if (chromosone%4 == 0):
-            beat.append(('c',dur))
-        else:
-            beat.append(('r',dur))
+            beat.append(('c',2))
+            beat.append(('f',2))
+        # else:
+        #     beat.append(('f',dur/2))
     return  tuple(beat)
 
 def generateBasslineSection(note):
@@ -180,9 +181,9 @@ def changeScale(scale):
     elif(scale == 2):
         constants.DIATONIC = constants.MINOR_NOTES
         print("GOTEMs")
-    else:
-        constants.DIATONIC = constants.ALL_NOTES
-        print("GOTEM")
+    # else:
+    #     constants.DIATONIC = constants.ALL_NOTES
+    #     print("GOTEM")
 
 def changeOctaves(min,max):
     constants.MIN_OCTAVE = int(min)
