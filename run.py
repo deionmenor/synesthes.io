@@ -13,7 +13,6 @@ from pydub import AudioSegment
 
 if __name__ == "__main__":
 
-    constants.debog = "!!!"
     ## First gets input from user, will later accept by the mapping modules output
     filename = input("What image?")
     color_value = []
@@ -54,7 +53,7 @@ if __name__ == "__main__":
     #make bass lower
     bass_file = AudioSegment.from_wav("output_bass.wav")
     bass_ = bass_file[:]
-    bass_ = bass_ - 10
+    bass_ = bass_ - 20
     bass_.export("output_bass.wav", format="wav")
 
     print("Combining audio layers...")
@@ -68,6 +67,7 @@ if __name__ == "__main__":
     print("min octave: ", constants.MIN_OCTAVE)
     print("notes", constants.DIATONIC)
     print("BPM", constants.BPM)
+    print("beats per section", constants.BEATS_PER_SECTION)
 
     # Works for Linux
     os.system('xdg-open "output_final.wav"')
