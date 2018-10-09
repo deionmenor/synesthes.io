@@ -11,8 +11,6 @@ def mapValues(HSL):
     print("ave L: ",lightness_average)
 
 
-
-
     saturation_values_sum = 0
     for i in HSL:
         saturation_values_sum+= i[1]
@@ -46,8 +44,8 @@ def getBPM(ave):
     print("bpm??",ave)
     if ave < 20:
         return 80
-    elif ave < 60:
-        return 120
+    elif ave < 50:
+        return 130
     else:
         return 180
 

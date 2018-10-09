@@ -162,7 +162,7 @@ def generateBassline(notes):
         bass.extend(generateBasslineSection(note))
         print(note)
     print('actual',bass)
-    return bass*4
+    return bass*8
 
 def combineWAVs(a,b,c):
 
@@ -174,13 +174,15 @@ def combineWAVs(a,b,c):
     combined.export(c, format='wav')
 
 def changeScale(scale):
-    global DIATONIC
     if (scale == 1):
-        DIATONIC = constants.MAJOR_NOTES
+        constants.DIATONIC = constants.MAJOR_NOTES
+        print("GOTEMzz")
     elif(scale == 2):
-        DIATONIC = constants.MINOR_NOTES
-    else: 
-        DIATONIC = constants.ALL_NOTES
+        constants.DIATONIC = constants.MINOR_NOTES
+        print("GOTEMs")
+    else:
+        constants.DIATONIC = constants.ALL_NOTES
+        print("GOTEM")
 
 def changeOctaves(min,max):
     constants.MIN_OCTAVE = int(min)
