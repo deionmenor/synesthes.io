@@ -33,6 +33,7 @@ def mapValues(HSL):
     print("ave V: ",variance)
 
     mino = getOctave(lightness_average)
+    print(mino)
     maxo = mino
     # BPM = int(input("BPM ---> "))
     BPM = getBPM(saturation_average)

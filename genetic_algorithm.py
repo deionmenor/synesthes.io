@@ -3,7 +3,7 @@ import pysynth_p
 import pysynth_e
 import pysynth_c
 import os
-from constants import *
+import constants
 import collections
 from hsl import analyzePartitions
 from pydub import AudioSegment
@@ -26,12 +26,12 @@ def gen_dna(dna_size):
 # Ex. C2 is represented as (0,0,0), B2 is (6,0,6), middle C is (0,2,16) and a rest can be (7,3,31)
 
 def gen_chromosone():
-    octave_idx = random.choice(OCTAVE_IDX)
-    note_idx = random.choice(NOTE_IDX)
+    octave_idx = random.choice(constants.OCTAVE_IDX)
+    note_idx = random.choice(constants.NOTE_IDX)
 
     # which octave * size of octave  + note in that octave
-    abs_note = octave_idx * NUM_DIATONIC_REST + note_idx
-    duration = DEFAULT_DURATION
+    abs_note = octave_idx * constants.NUM_DIATONIC_REST + note_idx
+    duration = constants.DEFAULT_DURATION
     return (note_idx, octave_idx, abs_note, duration)
 
 def fitness_prop_selection(population_with_score_sorted):
@@ -68,7 +68,7 @@ def mutate_dna(dna):
     def mutate_chromosone(chromosone):
         r = random.randint(0,100)
 
-        if r <= MUTATION_PERCENTAGE:
+        if r <= constants.MUTATION_PERCENTAGE:
             return gen_chromosone()
         else:
             return chromosone
@@ -96,7 +96,7 @@ def score_population(population):
 def run_iteration(population):
     population_with_score_sorted = score_population(population)
     new_pop = []
-    while (len(new_pop) < POPULATION):
+    while (len(new_pop) < constants.POPULATION):
         first_parent = fitness_prop_selection(population_with_score_sorted)
         second_parent = fitness_prop_selection(population_with_score_sorted)
         first_child, second_child = crossover(first_parent, second_parent)
@@ -109,9 +109,9 @@ def run_iteration(population):
     return mutated_population
 
 def run_genetic_algo():
-    population = gen_population(POPULATION, BEATS_PER_SECTION)
+    population = gen_population(constants.POPULATION, constants.BEATS_PER_SECTION)
 
-    for _ in range(ITERATIONS):
+    for _ in range(constants.ITERATIONS):
         population = run_iteration(population)
 
     return score_population(population)[0][1]
@@ -140,9 +140,9 @@ def arrange_song_into_aaba(a,b):
     return a+a+b+a
 
 def generateBeat():
-    dur = DEFAULT_DURATION
+    dur = constants.DEFAULT_DURATION
     beat = []
-    for chromosone in range(int(BEATS_PER_SECTION*5)):
+    for chromosone in range(int(constants.BEATS_PER_SECTION*5)):
         if (chromosone%4 == 0):
             beat.append(('c',dur))
         else:
@@ -152,7 +152,7 @@ def generateBeat():
 def generateBasslineSection(note):
 
     bass=[]
-    for chromosone in range(int(BEATS_PER_SECTION/2)):
+    for chromosone in range(int(constants.BEATS_PER_SECTION/2)):
        bass.append((note,64))
     return  tuple(bass)
 
@@ -162,6 +162,7 @@ def generateBassline(notes):
         bass.extend(generateBasslineSection(note))
         print(note)
     print('actual',bass)
+    print(constants.debog)
     return bass*4
 
 def combineWAVs(a,b,c):
@@ -176,20 +177,19 @@ def combineWAVs(a,b,c):
 def changeScale(scale):
     global DIATONIC
     if (scale == 1):
-        DIATONIC = MAJOR_NOTES
+        DIATONIC = constants.MAJOR_NOTES
     elif(scale == 2):
-        DIATONIC = MINOR_NOTES
+        DIATONIC = constants.MINOR_NOTES
     else: 
-        DIATONIC = ALL_NOTES
+        DIATONIC = constants.ALL_NOTES
 
 def changeOctaves(min,max):
-    global MIN_OCTAVE, MAX_OCTAVE, OCTAVES, NUM_OCTAVES, OCTAVE_IDX, NUM_NOTES
-    MIN_OCTAVE = int(min)
-    MAX_OCTAVE = int(max)
-    OCTAVES = range(MIN_OCTAVE, MAX_OCTAVE + 1)
-    NUM_OCTAVES = len(OCTAVES)
-    OCTAVE_IDX = range(NUM_OCTAVES)
-    NUM_NOTES  = NUM_OCTAVES * NUM_DIATONIC_REST
+    constants.MIN_OCTAVE = int(min)
+    constants.MAX_OCTAVE = int(max)
+    constants.OCTAVES = range(constants.MIN_OCTAVE, constants.MAX_OCTAVE + 1)
+    constants.NUM_OCTAVES = len(constants.OCTAVES)
+    constants.OCTAVE_IDX = range(constants.NUM_OCTAVES)
+    constants.NUM_NOTES  = constants.NUM_OCTAVES * constants.NUM_DIATONIC_REST
 
 
 

@@ -1,7 +1,7 @@
 from genetic_algorithm import run_genetic_algo, massage,generateBassline,generateBeat,combineWAVs, arrange_song_into_aaba
 from mapping import mapValues
 from misc import dnaToPsSong
-from constants import BPM
+import constants
 import random
 import pysynth_p
 import pysynth_e
@@ -13,6 +13,7 @@ from pydub import AudioSegment
 
 if __name__ == "__main__":
 
+    constants.debog = "!!!"
     ## First gets input from user, will later accept by the mapping modules output
     filename = input("What image?")
     color_value = []
@@ -46,9 +47,12 @@ if __name__ == "__main__":
 
     # pysynth_c.make_wav(massaged_tune, fn = "output.wav", leg_stac = .7, bpm = bpm)
     print("Making WAVs...")
-    pysynth_e.make_wav(tune_plus_rest, fn = "output_melody.wav",  bpm = BPM)
-    pysynth_p.make_wav(beat, fn = "output_beat.wav",  bpm = BPM)
-    pysynth_c.make_wav(bass, fn = "output_bass.wav",  bpm = BPM)
+    pysynth_e.make_wav(tune_plus_rest, fn = "output_melody.wav",  bpm = constants.BPM)
+    pysynth_p.make_wav(beat, fn = "output_beat.wav",  bpm = constants.BPM)
+    pysynth_c.make_wav(bass, fn = "output_bass.wav",  bpm = constants.BPM)
+
+    constants.debog = "!!!"
+    print(constants.debog)
 
     # print(MIN_OCTAVE);
     # print(MAX_OCTAVE);

@@ -1,5 +1,6 @@
 from misc import getOctaveIdx, getAbsNote, getLetter
-from genetic_algorithm import BEATS_PER_SECTION, BARS_PER_SECTION, CHORD_NOTES, BEATS_PER_BAR
+# from genetic_algorithm import BEATS_PER_SECTION, BARS_PER_SECTION, CHORD_NOTES, BEATS_PER_BAR
+import constants
 import collections
 
 def octave_range_fitness(dna):
@@ -64,24 +65,24 @@ def no_jump_fitness(dna):
 
 def isSignificantNote(chromosone):
     letter = getLetter(chromosone)
-    return letter in CHORD_NOTES
+    return letter in constants.CHORD_NOTES
 
 #Is Down beat a significant note?
 def down_beat_fitness(dna):
     score = 0
-    for i in range(0, BEATS_PER_SECTION, BEATS_PER_BAR):
+    for i in range(0, constants.BEATS_PER_SECTION, constants.BEATS_PER_BAR):
         chromosone = dna[i]
         if isSignificantNote(chromosone):
-          score += BEATS_PER_BAR
+          score += constants.BEATS_PER_BAR
 
     return score
 
 #Is back beat a significant note?
 def back_beat_fitness(dna):
     score = 0
-    for i in range(1, BEATS_PER_SECTION, int(BEATS_PER_BAR/2)):
+    for i in range(1, constants.BEATS_PER_SECTION, int(constants.BEATS_PER_BAR/2)):
         chromosone = dna[i]
         if isSignificantNote(chromosone):
-          score += BEATS_PER_BAR
+          score += constants.BEATS_PER_BAR
 
     return score
