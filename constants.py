@@ -1,14 +1,17 @@
-BPM = 120
-MIN_OCTAVE = 3
-MAX_OCTAVE = 4
+BPM = 180
+MIN_OCTAVE = 2
+MAX_OCTAVE = 3
 OCTAVES = range(MIN_OCTAVE, MAX_OCTAVE + 1)
 NUM_OCTAVES = len(OCTAVES)
 OCTAVE_IDX = range(NUM_OCTAVES)
+debog = "???"
 
 
 #NOTES
 MINOR_NOTES =  ['f','g','g#','a#','c','c#','eb']
 MAJOR_NOTES =  ['c','d','e','f','g','a','b']
+# NIKOS_LIST = ['f#','g#','a','b','c#','d','e']
+# NIKOS_LIST_2 = ['a#','c','d','d#','f','g','a']
 ALL_NOTES =  MAJOR_NOTES
 ALL_NOTES.extend(MINOR_NOTES)
 DIATONIC = MAJOR_NOTES
@@ -21,7 +24,7 @@ NUM_NOTES  = NUM_OCTAVES * NUM_DIATONIC_REST
 
 DEFAULT_DURATION = 8 # change back to 8
 BARS_PER_SECTION = 4
-BEATS_PER_BAR = 8
+BEATS_PER_BAR = 4
 BEATS_PER_SECTION = BARS_PER_SECTION * BEATS_PER_BAR
 
 TONIC = 'c'

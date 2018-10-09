@@ -1,3 +1,4 @@
+
 #for image segmentation
 import image_slicer
 import os
@@ -5,9 +6,6 @@ import os
 #for HSL extraction
 import cv2
 import numpy as np
-
-#for analyzing partitions
-import fnmatch
 
 #slice image into 9 equal parts
 def sliceImage(filename):
@@ -17,7 +15,7 @@ def sliceImage(filename):
         os.makedirs(newpath)
     image_slicer.save_tiles(partitions,directory=newpath,prefix=filename)
 
-#convert rgb to hsl
+   
 def hsl(r,g,b):
     
     r=r/255
@@ -52,11 +50,9 @@ def hsl(r,g,b):
     hsllist.append(l)
     return hsllist
 
-#get mean of numbers
 def mean(numbers):
     return float(sum(numbers))/max(len(numbers),1)
 
-#get hsl of image
 def getHSL(image):
     pixels = np.asarray(image.shape)
     rows = pixels[0]
@@ -78,22 +74,20 @@ def getHSL(image):
     output=[mean(hlist),mean(slist),mean(llist)]
     return output
 
-#list hsl values of partitions
 def createHSLPartitionList(images):
     HSLPartitionList = []
     for i in range(9):
         HSLPartitionList.append(getHSL(images[i]))
         print("analyzing partition #",i)
     return HSLPartitionList
-
-#returns hsl values of each partition
+        
 def analyzePartitions(filename):
     sliceImage(filename)
     images = []
 
-    for root, dirs, files in os.walk(filename):  
-        for filename in files:
-            images.append(cv2.imread(filename))
+    for files in os.listdir(filename):
+        img = cv2.imread(filename+"/"+files)
+        images.append(img)
     
     xxx = createHSLPartitionList(images)
     print(xxx)

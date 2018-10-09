@@ -152,8 +152,8 @@ def generateBeat():
 def generateBasslineSection(note):
 
     bass=[]
-    for chromosone in range(int(constants.BARS_PER_SECTION/2)):
-       bass.append((note,2))
+    for chromosone in range(int(constants.BEATS_PER_SECTION/2)):
+       bass.append((note,64))
     return  tuple(bass)
 
 def generateBassline(notes):
@@ -162,6 +162,7 @@ def generateBassline(notes):
         bass.extend(generateBasslineSection(note))
         print(note)
     print('actual',bass)
+    print(constants.debog)
     return bass*4
 
 def combineWAVs(a,b,c):
