@@ -47,7 +47,7 @@ def monotonic_notes_fitness(dna):
 def no_jump_fitness(dna):
     def isJump(abs_notes, start_idx):
         MAX_JUMP = 4
-        #Ignoring rests XXX
+        #Ignoring rests 
         f_note = abs_notes[start_idx]
         n_note = abs_notes[start_idx + 1]
         return abs(f_note - n_note) > MAX_JUMP

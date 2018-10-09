@@ -8,7 +8,7 @@ OCTAVE_IDX = range(NUM_OCTAVES)
 
 #NOTES
 MINOR_NOTES =  ['f','g','g#','a#','c','c#','eb']
-MAJOR_NOTES =  ['c','d','e','f','g','a','b']
+MAJOR_NOTES =  ['c5','d5','e5','f5','g5','a5','b5']
 # ALL_NOTES =  MAJOR_NOTES.extend(MINOR_NOTES)
 DIATONIC = MINOR_NOTES
 REST = ['r']

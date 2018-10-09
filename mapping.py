@@ -32,7 +32,7 @@ def mapValues(HSL):
 
     mino = getOctave(lightness_average)
     print(mino)
-    maxo = mino
+    maxo = mino+1
     # BPM = int(input("BPM ---> "))
     constants.BPM = getBPM(saturation_average)
     changeOctaves(mino,maxo)
@@ -43,7 +43,7 @@ def getBPM(ave):
     ave = ave * 100
     print("bpm??",ave)
     if ave < 20:
-        return 80
+        return 100
     elif ave < 50:
         return 130
     else:
@@ -52,15 +52,11 @@ def getBPM(ave):
 
 def getOctave(ave):
     ave = ave * 100
-    if ave < 17:
-        return 2
-    elif ave < 33:
+    if ave < 25:
         return 3
     elif ave < 50:
         return 4
-    elif ave < 67:
+    elif ave < 75:
         return 5
-    elif ave < 84:
-        return 6
     else:
-        return 7
+        return 6

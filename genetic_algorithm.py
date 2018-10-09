@@ -157,13 +157,15 @@ def generateBasslineSection(note):
        bass.append((note,2))
     return  tuple(bass)
 
-def generateBassline(notes):
+def generateBassline(notes,len):
     bass =[]
     for note in notes:
         bass.extend(generateBasslineSection(note))
         print(note)
     print('actual',bass)
-    return bass*8
+    return bass*len
+
+
 
 def combineWAVs(a,b,c):
 
