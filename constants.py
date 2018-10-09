@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 BPM = 121
 MIN_OCTAVE = 3
 MAX_OCTAVE = 4
-=======
-BPM = 180
-MIN_OCTAVE = 2
-MAX_OCTAVE = 3
->>>>>>> leina
 OCTAVES = range(MIN_OCTAVE, MAX_OCTAVE + 1)
 NUM_OCTAVES = len(OCTAVES)
 OCTAVE_IDX = range(NUM_OCTAVES)

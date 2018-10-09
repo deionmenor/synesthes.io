@@ -153,8 +153,8 @@ def generateBeat():
 def generateBasslineSection(note):
 
     bass=[]
-    for chromosone in range(int(constants.BEATS_PER_SECTION/2)):
-       bass.append((note,64))
+    for chromosone in range(int(constants.BARS_PER_SECTION/2)):
+       bass.append((note,2))
     return  tuple(bass)
 
 def generateBassline(notes,len):
