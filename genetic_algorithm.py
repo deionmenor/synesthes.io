@@ -179,7 +179,6 @@ def combineWAVs(a,b,c):
 def changeScale(scale):
     if (scale == 1):
         constants.DIATONIC = constants.MAJOR_NOTES
-        print("GOTEMzz")
     elif(scale == 2):
         constants.DIATONIC = constants.MINOR_NOTES
         print("GOTEMs")
