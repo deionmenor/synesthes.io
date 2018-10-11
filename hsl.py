@@ -15,7 +15,7 @@ def sliceImage(filename):
         os.makedirs(newpath)
     image_slicer.save_tiles(partitions,directory=newpath,prefix=filename)
 
-   
+#convert rgb to hsl   
 def hsl(r,g,b):
     
     r=r/255
@@ -50,9 +50,11 @@ def hsl(r,g,b):
     hsllist.append(l)
     return hsllist
 
+#get mean of numbers
 def mean(numbers):
     return float(sum(numbers))/max(len(numbers),1)
 
+#get mean HSL values of an image
 def getHSL(image):
     pixels = np.asarray(image.shape)
     rows = pixels[0]
@@ -74,13 +76,15 @@ def getHSL(image):
     output=[mean(hlist),mean(slist),mean(llist)]
     return output
 
+#get HSL values of multiple images
 def createHSLPartitionList(images):
     HSLPartitionList = []
     for i in range(9):
         HSLPartitionList.append(getHSL(images[i]))
         print("analyzing partition #",i)
     return HSLPartitionList
-        
+
+#get HSL values of an image's partitions      
 def analyzePartitions(filename):
     sliceImage(filename)
     images = []

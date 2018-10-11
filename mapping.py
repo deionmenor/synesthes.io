@@ -1,41 +1,46 @@
 from genetic_algorithm import changeOctaves,changeScale
 
+#map HSL values
 def mapValues(HSL):
     global BPM
     # scale = input("scale? (1) major (2) minor (3) mixed ---> ")
     scale = 1
+
+    #get average luminance
     lightness_values_sum = 0
     for i in HSL:
         lightness_values_sum+= i[2]
     lightness_average = lightness_values_sum/9
     print("ave L: ",lightness_average)
 
-
-
-
+    #get average saturation
     saturation_values_sum = 0
     for i in HSL:
         saturation_values_sum+= i[1]
     saturation_average = saturation_values_sum/9
     print("ave S: ", saturation_average)
 
+    #get average hue
     hue_values_sum = 0
     for i in HSL:
         hue_values_sum+= i[1]
     hue_average = hue_values_sum/9
     print("ave H: ",hue_average)
  
-    variance = 0
     # get how much variance in hue
+    variance = 0
     for i in HSL:
         variance += abs(i[1]-hue_average)
     variance = variance/9
     print("ave V: ",variance)
 
+    #octave based on average luminance
     mino = getOctave(lightness_average)
     print(mino)
     maxo = mino
     # BPM = int(input("BPM ---> "))
+
+    #bpm is based on average saturation
     BPM = getBPM(saturation_average)
     changeOctaves(mino,maxo)
     changeScale(scale)
