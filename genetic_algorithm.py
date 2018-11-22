@@ -31,7 +31,9 @@ def gen_chromosone():
 
     # which octave * size of octave  + note in that octave
     abs_note = octave_idx * constants.NUM_DIATONIC_REST + note_idx
-    duration = constants.DEFAULT_DURATION
+    # duration = constants.DEFAULT_DURATION
+    foo = [8, 4, 2, 16]
+    duration = random.choice(foo)
     return (note_idx, octave_idx, abs_note, duration)
 
 def fitness_prop_selection(population_with_score_sorted):
