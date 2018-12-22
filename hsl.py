@@ -9,7 +9,7 @@ import numpy as np
 
 #slice image into 9 equal parts
 def sliceImage(filename):
-    partitions = image_slicer.slice(filename+".png",9,save=False)
+    partitions = image_slicer.slice("img/"+filename+".png",9,save=False)
     newpath = filename 
     if not os.path.exists(newpath):
         os.makedirs(newpath)
@@ -114,6 +114,7 @@ def createHSLPartitionList(images):
     return HSLPartitionList
         
 def analyzePartitions(filename):
+    print("this is the filename",filename)
     sliceImage(filename)
     images = []
     print(os.listdir())

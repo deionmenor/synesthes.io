@@ -20,13 +20,13 @@ if __name__ == "__main__":
     soundfont = input("Soundfont?")
     runs = 1
 
-    if soundfont=="": soundfont = "FullGrandPiano"
+    if soundfont=="": soundfont = "Kawai Grand Piano"
 
     # TOTAL IMAGE ALGORITHM
     if process == "1":
         print("Analyzing image...")
         color_values = analyzePartitions(filename)
-        create_HSL_image(color_values,filename)
+        create_HSL_image(color_values,"img/"+filename)
         mapValues(color_values)
 
         print("Running genetic algorithms...")
@@ -57,7 +57,7 @@ if __name__ == "__main__":
             convertToMIDI(massaged_tune, constants.CHORD_PROGRESSION, constants.BPM, file )
 
             os.system('xdg-open "'+ filename + '.png"')
-            os.system('fluidsynth -ni ' + soundfont+'.sf2 ' + file +'.mid -o audio.driver=alsa' )
+            os.system('fluidsynth -ni ' + "\"soundfont/"+soundfont+'.sf2\" ' + file +'.mid -o audio.driver=alsa' )
         
 
         # print("min octave: ", constants.MIN_OCTAVE)

@@ -4,8 +4,6 @@ MAX_OCTAVE = 4
 OCTAVES = range(MIN_OCTAVE, MAX_OCTAVE + 1)
 NUM_OCTAVES = len(OCTAVES)
 OCTAVE_IDX = range(NUM_OCTAVES)
-debog = "???"
-
 
 #NOTES
 MINOR_NOTES =  ['f','g','g#','a#','c','c#','eb']
