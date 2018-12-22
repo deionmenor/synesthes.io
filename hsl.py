@@ -21,9 +21,7 @@ def create_HSL_image(hsl_values,image):
     src = image+".png"
     img = cv2.imread(src)
     height, width = img.shape[:2]
-
     font = cv2.FONT_HERSHEY_SIMPLEX
-
     hsl = hsl_values
 
 

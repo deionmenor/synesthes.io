@@ -17,8 +17,6 @@ PASSIVE_COOL = [[('c','e','g'), ('c','d#','f#','a'), ('d','f','a','c'),('g','b',
 
 
 def mapValues(HSL):
-    # scale = input("scale? (1) major (2) minor (3) mixed ---> ")
-    scale = 1
     lightness_values_sum = 0
     for i in HSL:
         lightness_values_sum+= i[2]
@@ -46,14 +44,17 @@ def mapValues(HSL):
     print("ave V: ",variance)
 
     mino = getOctave(lightness_average)
-    print(mino)
     maxo = mino+1
-    # BPM = int(input("BPM ---> "))
-    constants.BPM = getBPM(saturation_average)
-    changeOctaves(mino,maxo)
-    changeScale(scale)
+    bpm = getBPM(saturation_average)
+    chord_prog = getProgression(hue_average, saturation_average)
 
-    constants.CHORD_PROGRESSION = getProgression(hue_average, saturation_average)
+    
+    return (mino,maxo,bpm,chord_prog)
+
+    # changeOctaves(mino,maxo)
+    # changeScale(scale)
+
+    
 
 
 def getBPM(ave):

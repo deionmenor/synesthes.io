@@ -1,5 +1,5 @@
 from genetic_algorithm import run_genetic_algo, massage,generateBassline,generateBeat, combineWAVs, arrange_song_into_aaba
-from mapping import mapValues
+from mapping import mapValues, changeOctaves
 from mapping2 import mapValuesSequentially
 from misc import dnaToPsSong
 import constants
@@ -22,17 +22,26 @@ if __name__ == "__main__":
 
     if soundfont=="": soundfont = "Kawai Grand Piano"
 
+    chord_progression = [('c','e','g'), ('a','c','e'), ('d','f','a'), ('e','g#','b','d')]
+    BPM = 120
+
     # TOTAL IMAGE ALGORITHM
     if process == "1":
+
+
         print("Analyzing image...")
         color_values = analyzePartitions(filename)
+        
+        ### create png with partitions and respective HSL values
         create_HSL_image(color_values,"img/"+filename)
-        mapValues(color_values)
+
+
+        mino,maxo,BPM,chord_progression = mapValues(color_values)
+        changeOctaves(mino,maxo)
 
         print("Running genetic algorithms...")
 
         for i in range(int(runs)):
-        
         
             # create two melodies using the genetic algorithm
             a = run_genetic_algo()
@@ -52,18 +61,13 @@ if __name__ == "__main__":
             progressions = [['c','d','g','eb'], ['c','d','g','eb'],['c','d','g','eb']]
             chord_progression = ['c','d','g','eb']
             print("Generating bassline...")
-            print("tempo is:", constants.BPM)
+            print("tempo is:", BPM)
             file = "output_"+str(i)
-            convertToMIDI(massaged_tune, constants.CHORD_PROGRESSION, constants.BPM, file )
+            convertToMIDI(massaged_tune, chord_progression, BPM, file )
 
             os.system('xdg-open "'+ filename + '.png"')
             os.system('fluidsynth -ni ' + "\"soundfont/"+soundfont+'.sf2\" ' + file +'.mid -o audio.driver=alsa' )
         
-
-        # print("min octave: ", constants.MIN_OCTAVE)
-        # print("notes", constants.DIATONIC)
-        # print("BPM", constants.BPM)
-        # print("beats per section", constants.BEATS_PER_SECTION)
 
     elif process == "2":
         
@@ -86,11 +90,8 @@ if __name__ == "__main__":
             # print("Generating beat...")
             # beat = massage(generateBeat())
             print("Generating chords...")
-            # bass = massage(generateBassline(chord_progression,4))
-
-            print("tempo is:", constants.BPM)
             file = filename +"_" +str(i)
-            convertToMIDI(massaged_tune, constants.CHORD_PROGRESSION, constants.BPM, file )
+            convertToMIDI(massaged_tune, chord_progression, BPM, file )
             print(constants.BEATS_PER_SECTION)
   
 
