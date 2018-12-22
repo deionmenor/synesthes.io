@@ -3,14 +3,7 @@ import music21
 
 # create your MIDI object
 
-
-# C,G,Am,F
-chordprog1 = []
-chordprog1 =  [ ('c3','e3','g3') , ('g3','b3','d3') , ('ab3','c3','eb3') , ('f3','a3','c3') ]
-# Am   G     F     G 
-chordprog2 = [ ('ab3','c3','eb3'), ('g3','b3','d3'),  ('f3','a3','c3'), ('g3','b3','d3')]
-
-def convertToMIDI( melodyTuple , chords, tempo, filename):
+def convertToMIDI( melodyTuple , chordprog, tempo, filename):
 
 
     # create your MIDI object
@@ -41,18 +34,16 @@ def convertToMIDI( melodyTuple , chords, tempo, filename):
 
     finaltime = time
     time=0
-
 # make the chords
     while time<finaltime:
-        for i in chordprog1:
-            print("this is the", i[0], "note at time:", time)
+        for i in chordprog:
+            # print("this is the", i[0], "note at time:", time)
             volume=70
             duration = 4
             for x in i:
                 pitch = music21.pitch.Pitch(x).midi
                 mf.addNote(1, channel, pitch, time, duration, volume)
             time = time+ duration
-        
 
     with open(filename + ".mid", 'wb') as outf:
         mf.writeFile(outf)

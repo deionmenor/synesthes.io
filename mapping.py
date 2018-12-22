@@ -1,5 +1,20 @@
 from genetic_algorithm import changeOctaves,changeScale
 import constants
+import random
+import music21
+
+#https://www.michael-thomas.com/music/class/chords_notesinchords.htm
+#https://www.pianochord.org/bm7.html
+#https://www.8notes.com/piano_chord_chart/cdim7.asp
+#CHORD PROGRESSIONS
+ACTIVE_WARM = [[('c','e','g'), ('a','c','e'), ('d','f','a'), ('e','g#','b','d')],[('c','e','g'), ('d','f','a'), ('e','g','b'), ('f','a','c')], [('c','e','g'), ('e', 'g#', 'b', 'd'), ('a','c','e'), ('c','e','g','bb')], [('c', 'e', 'g'), ('b', 'd', 'f#', 'a'), ('e','g#','b','d'), ('a','c','e')]]
+
+ACTIVE_COOL = [[('c','e','g'), ('c', 'e', 'g#'), ('c','e','g','a'), ('c', 'e', 'g#')], [('c','e','g'), ('c', 'e', 'g', 'b'), ('c', 'e', 'g','bb')], [('c', 'e', 'g'), ('e','g','b'), ('e','g','b','d')]]
+
+PASSIVE_WARM = [[('c','e','g'), ('g', 'bb', 'd'), ('c', 'e', 'g','bb'), ('f','a','c')], [('c','e','g'), ('g','b','d'), ('a','c','e'), ('e','g','b')], [('c','e','g'), ('e','g','b'), ('f','a','c'), ('g','b','d')], [('c','e','g'), ('a','c','e'), ('d','f','a','c'), ('g','b','d')], [('c','e','g'), ('bb', 'd', 'f'), ('f','a','c'), ('c','e','g')], [('c','e','g'),('f','a','c'),('g','b','d'),('c','e','g')], [('c','e','g'), ('d','f','a','c'), ('g','b','d','f'), ('c','e','g')]] 
+
+PASSIVE_COOL = [[('c','e','g'), ('c','d#','f#','a'), ('d','f','a','c'),('g','b','d','f')], [('c','e','g'),('a','c','e'),('f','ab','c'),('g','b','d','f')], [('d','f#','a'),('g','b','d'),('f','a','c'),('a','c','e','g')]]
+
 
 def mapValues(HSL):
     # scale = input("scale? (1) major (2) minor (3) mixed ---> ")
@@ -38,6 +53,8 @@ def mapValues(HSL):
     changeOctaves(mino,maxo)
     changeScale(scale)
 
+    constants.CHORD_PROGRESSION = getProgression(hue_average, saturation_average)
+
 
 def getBPM(ave):
     ave = ave * 100
@@ -59,3 +76,25 @@ def getOctave(ave):
         return 5
     else:
         return 6
+
+def getProgression(hue, saturation):
+    print("hue:",hue,"sat:",saturation)
+    if hue<= 359 and hue >= 271  and saturation >= 0.5:
+        print("Mood for chord progression: active warm")
+        return random.choice(ACTIVE_WARM)
+    elif hue<= 89 and hue >= 0  and saturation >= 0.5:
+        print("Mood for chord progression: active warm")
+        return random.choice(ACTIVE_WARM)
+    elif hue >= 90 and hue <= 270  and saturation >= 0.5:
+        print("Mood for chord progression: active cool")
+        return random.choice(ACTIVE_COOL)
+    elif hue<= 359 and hue >= 271  and saturation >= 0.49:
+        print("Mood for chord progression: passive warm")
+        return random.choice(PASSIVE_WARM)
+    elif hue<= 89 and hue >= 0 and saturation <= 0.49: 
+        print("Mood for chord progression: passive warm")
+        return random.choice(PASSIVE_WARM)
+    elif hue >= 90 and hue <= 270 and saturation <= 0.49:
+        print("Mood for chord progression: passive cool")
+        return random.choice(PASSIVE_COOL)
+    

@@ -112,6 +112,7 @@ def run_iteration(population):
 
 def run_genetic_algo():
     population = gen_population(constants.POPULATION, constants.BEATS_PER_SECTION)
+    print("debug_beats_per_section", constants.BEATS_PER_SECTION)
 
     for _ in range(constants.ITERATIONS):
         population = run_iteration(population)
