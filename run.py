@@ -8,7 +8,7 @@ import os
 import collections
 from hsl import analyzePartitions, create_HSL_image
 from hsl2 import analyzePartitionsSequentially
-from pydub import AudioSegment
+# from pydub import AudioSegment
 from midi import convertToMIDI
 from midi2audio import FluidSynth
 
@@ -17,10 +17,10 @@ if __name__ == "__main__":
     # First gets input from user, will later accept by the mapping modules output
     filename = input("What image?")
     process = input("(1) Total or (2) Sequential?")
-    soundfont = input("Soundfont?")
-    runs = 1
+    # soundfont = input("Soundfont?")
+    runs = input("How many runs?")
 
-    if soundfont=="": soundfont = "Kawai Grand Piano"
+    # if soundfont=="": soundfont = "Kawai Grand Piano"
 
     chord_progression = [('c','e','g'), ('a','c','e'), ('d','f','a'), ('e','g#','b','d')]
     BPM = 120
@@ -58,15 +58,13 @@ if __name__ == "__main__":
 
             print("Generating beat...")
             beat = massage(generateBeat())
-            progressions = [['c','d','g','eb'], ['c','d','g','eb'],['c','d','g','eb']]
-            chord_progression = ['c','d','g','eb']
             print("Generating bassline...")
             print("tempo is:", BPM)
-            file = "output_"+str(i)
+            file = filename+ " " + str(i)
             convertToMIDI(massaged_tune, chord_progression, BPM, file )
 
-            os.system('xdg-open "'+ filename + '.png"')
-            os.system('fluidsynth -ni ' + "\"soundfont/"+soundfont+'.sf2\" ' + file +'.mid -o audio.driver=alsa' )
+            # os.system('xdg-open "'+ "img/"+filename + '"')
+            # os.system('fluidsynth -ni ' + "\"soundfont/"+soundfont+'.sf2\" ' + file +'.mid -o audio.driver=alsa' )
         
 
     elif process == "2":
@@ -91,6 +89,7 @@ if __name__ == "__main__":
             # beat = massage(generateBeat())
             print("Generating chords...")
             file = filename +"_" +str(i)
+            print("midi should be "+ file)
             convertToMIDI(massaged_tune, chord_progression, BPM, file )
             print(constants.BEATS_PER_SECTION)
   

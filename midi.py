@@ -36,14 +36,16 @@ def convertToMIDI( melodyTuple , chordprog, tempo, filename):
     time=0
 # make the chords
     while time<finaltime:
+        print(chordprog)
         for i in chordprog:
             # print("this is the", i[0], "note at time:", time)
-            volume=70
+            volume=80
             duration = 4
             for x in i:
                 pitch = music21.pitch.Pitch(x).midi
                 mf.addNote(1, channel, pitch, time, duration, volume)
             time = time+ duration
 
-    with open(filename + ".mid", 'wb') as outf:
+    print(filename)
+    with open("midi_outputs"+"/"+filename + ".mid", 'wb') as outf:
         mf.writeFile(outf)

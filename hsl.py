@@ -9,7 +9,7 @@ import numpy as np
 
 #slice image into 9 equal parts
 def sliceImage(filename):
-    partitions = image_slicer.slice("img/"+filename+".png",9,save=False)
+    partitions = image_slicer.slice("img/"+filename,9,save=False)
     newpath = filename 
     if not os.path.exists(newpath):
         os.makedirs(newpath)
@@ -18,7 +18,7 @@ def sliceImage(filename):
 
 def create_HSL_image(hsl_values,image):
 
-    src = image+".png"
+    src = image
     img = cv2.imread(src)
     height, width = img.shape[:2]
     font = cv2.FONT_HERSHEY_SIMPLEX
